@@ -17,6 +17,7 @@ async function main() {
   });
 
   await api.ensureAuth();
+  let c = api.getConversation();
 
   bot.command({
     name: "chatgpt",
@@ -41,7 +42,7 @@ async function main() {
         } else {
           try {
             let argumen = args.join(" ");
-            let resp = await api.sendMessage(argumen);
+            let resp = await c.sendMessage(argumen);
             ctx.reply({ text: resp });
           } catch {
             ctx.reply({ text: '💀 Something went wrong... Try again.' })
